@@ -6,10 +6,10 @@ import {mount} from "@vue/test-utils";
 describe('CalcPage', () =>{
     const wrapper = mount(KontaktSkjema);
 
-    it("Should contain Name input field", () => {
+    it("Should contain Name label", () => {
         expect(wrapper.html()).contains('Name: ');
     })
-    it("Should contain Email input field", () => {
+    it("Should contain Email label", () => {
         expect(wrapper.html()).contains('Email: ');
     })
 })

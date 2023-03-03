@@ -53,7 +53,8 @@ export default {
     registerReview(name,email,message){
       this.result = `Success; ${name} with email ${email} sent in the message: ${message}`;
 
-      this.$store.dispatch('storeInfo',name,email);
+      this.$store.state.name = name;
+      this.$store.state.email = email;
 
     }
   }

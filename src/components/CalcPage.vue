@@ -34,11 +34,12 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return{
       currentInput: '',
-      operator: null,
+      operator: "",
       previous: null,
       operatorClicked: false,
     }
@@ -73,28 +74,32 @@ export default {
     },
 
     divide() {
-      this.operator = (a, b) => a / b;
+      //this.operator = (a, b) => a / b;
+      this.operator = "divide";
       this.operatorClicked = true;
       this.previous = this.currentInput;
       //document.getElementsByClassName("log").item(0).lastElementChild.innerHTML += `${this.currentInput} / `;
     },
 
     multiply() {
-      this.operator = (a, b) => a * b;
+      //this.operator = (a, b) => a * b;
+      this.operator = "multiply";
       this.operatorClicked = true;
       this.previous = this.currentInput;
       //document.getElementsByClassName("log").item(0).lastElementChild.innerHTML += `${this.currentInput} x `;
     },
 
     subtract() {
-      this.operator = (a, b) => a - b;
+      //this.operator = (a, b) => a - b;
+      this.operator = "subtract";
       this.operatorClicked = true;
       this.previous = this.currentInput;
       //document.getElementsByClassName("log").item(0).lastElementChild.innerHTML += `${this.currentInput} - `;
     },
 
     add() {
-      this.operator = (a, b) => a + b;
+      //this.operator = (a, b) => a + b;
+      this.operator = "add";
       this.operatorClicked = true;
       this.previous = this.currentInput;
       //document.getElementsByClassName("log").item(0).lastElementChild.innerHTML += `${this.currentInput} + `;
@@ -102,9 +107,17 @@ export default {
 
     equals() {
       //document.getElementsByClassName("log").item(0).lastElementChild.innerHTML += `${this.currentInput} = `;
-      this.currentInput = `${this.operator(parseFloat(this.previous), parseFloat(this.currentInput))}`;
-      this.previous = null;
+      //this.currentInput = `${this.operator(parseFloat(this.previous), parseFloat(this.currentInput))}`;
+      //this.previous = null;
       //document.getElementsByClassName("log").item(0).lastElementChild.innerHTML += `${this.currentInput}`;
+
+      axios.put(`http://localhost:8081/lead/insert?firstNumber=${this.previous}&secondNumber=${this.currentInput}&operation=${this.operator}&id=1`)
+          .then(response => {
+            console.log(response);
+            this.currentInput = response.data;
+          })
+          .catch(error => console.log(error));
+
 
 
       //var div = document.createElement("div");
